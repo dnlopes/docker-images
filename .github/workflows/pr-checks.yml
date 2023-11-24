@@ -15,13 +15,14 @@ jobs:
     name: Semantic PR
     uses: SiggilumDiaboli/github-workflows/.github/workflows/pull-requests.yaml@main
 
-  docker_build:
-    name: Docker build
+  docker_build_spacelift-runner:
+    name: Docker build spacelift-runner
     uses: ./.github/workflows/docker-build-template.yaml
     with:
-      push: false
+      push: true
       commit_ref: ${{ github.event.pull_request.head.ref }}
       file_name: spacelift-runner.Dockerfile
+      image_name: spacelift-runner
     secrets:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}

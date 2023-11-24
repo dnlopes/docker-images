@@ -52,12 +52,10 @@ jobs:
         with:
           # list of Docker images to use as base name for tags
           images: |
-            name/app
-            ghcr.io/username/app
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.image_name }}
           # generate Docker tags based on the following events/attributes
           tags: |
             latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.image_name }}:latest
 
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v3

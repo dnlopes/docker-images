@@ -1,0 +1,27 @@
+name: PR
+on:
+  pull_request:
+    branches: [main]
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - edited
+      - labeled
+      - unlabeled
+
+jobs:
+  semantic_pr:
+    name: Semantic PR
+    uses: SiggilumDiaboli/github-workflows/.github/workflows/pull-requests.yaml@main
+
+  docker_build:
+    name: Docker build
+    uses: ./.github/workflows/docker-build-template.yaml
+    with:
+      push: false
+      commit_ref: ${{ github.event.pull_request.head.ref }}
+      path: ./spacelift-runner.Dockerfile
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}

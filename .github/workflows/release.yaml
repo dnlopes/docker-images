@@ -1,0 +1,33 @@
+name: Release
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  tag_and_release:
+    name: Release version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: release-drafter/release-drafter@v5
+        name: Generate release notes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: "Wait 5 seconds"
+        run: |
+          sleep 5
+
+      - uses: InsonusK/get-latest-release@v1.1.0
+        name: Get draft release
+        id: last_release
+        with:
+          myToken: ${{ secrets.GITHUB_TOKEN }}
+          view_top: 1
+
+      - uses: eregon/publish-release@v1
+        name: Publish release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_id: ${{ steps.last_release.outputs.id }}

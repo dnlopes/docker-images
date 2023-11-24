@@ -1,0 +1,38 @@
+name-template: "Version $RESOLVED_VERSION"
+tag-template: "v$RESOLVED_VERSION"
+include-labels:
+  - feature
+  - fix
+  - chore
+  - breaking-change
+categories:
+  - title: 🚨 Breaking Changes 🚨
+    labels:
+      - breaking-change
+  - title: 🚀 New Features 🚀
+    labels:
+      - feature
+  - title: 🐛 Bugfixs 🐛
+    labels:
+      - fix
+  - title: 🚧 Other Changes 🚧
+    labels:
+      - "*"
+change-template: "- $TITLE @$AUTHOR (#$NUMBER)"
+change-title-escapes: '\<*_&' # You can add # and @ to disable mentions, and add ` to disable code blocks.
+version-resolver:
+  major:
+    labels:
+      - "breaking-change"
+  minor:
+    labels:
+      - feature
+  patch:
+    labels:
+      - fix
+      - chore
+  default: patch
+template: |
+  ## Changes
+
+  $CHANGES

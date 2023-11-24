@@ -1,17 +1,17 @@
 name-template: "Version $RESOLVED_VERSION"
 tag-template: "v$RESOLVED_VERSION"
 include-labels:
-  - feature
+  - feat
   - fix
   - chore
-  - breaking-change
+  - breaking
 categories:
   - title: 🚨 Breaking Changes 🚨
     labels:
-      - breaking-change
+      - breaking
   - title: 🚀 New Features 🚀
     labels:
-      - feature
+      - feat
   - title: 🐛 Bugfixs 🐛
     labels:
       - fix
@@ -23,10 +23,10 @@ change-title-escapes: '\<*_&' # You can add # and @ to disable mentions, and add
 version-resolver:
   major:
     labels:
-      - "breaking-change"
+      - "breaking"
   minor:
     labels:
-      - feature
+      - feat
   patch:
     labels:
       - fix

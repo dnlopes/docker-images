@@ -5,6 +5,9 @@ include-labels:
   - fix
   - chore
   - breaking-change
+  - semver:patch
+  - semver:minor
+  - semver:major
 categories:
   - title: 🚨 Breaking Changes 🚨
     labels:
@@ -23,14 +26,13 @@ change-title-escapes: '\<*_&' # You can add # and @ to disable mentions, and add
 version-resolver:
   major:
     labels:
-      - "breaking-change"
+      - semver:major
   minor:
     labels:
-      - feature
+      - semver:minor
   patch:
     labels:
-      - fix
-      - chore
+      - semver:patch
   default: patch
 template: |
   ## Changes

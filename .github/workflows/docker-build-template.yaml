@@ -57,6 +57,7 @@ jobs:
           # generate Docker tags based on the following events/attributes
           tags: |
             latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.image_name }}:latest
 
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v3

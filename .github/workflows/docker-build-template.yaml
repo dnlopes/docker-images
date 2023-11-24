@@ -11,10 +11,15 @@ on:
         required: true
         description: "The Git reference to checkout."
         type: string
-      path:
+      file_name:
         required: true
-        description: "The Git reference to checkout."
+        description: "The name of the Dockerfile"
         type: string
+      context:
+        required: false
+        description: "The base dir to work on."
+        type: string
+        default: .
     secrets:
       DOCKERHUB_USERNAME:
         required: true
@@ -70,7 +75,8 @@ jobs:
       - name: Build and (conditionally) push
         uses: docker/build-push-action@v5
         with:
-          context: ${{ inputs.path }}
+          context: ${{ inputs.context }}
+          file: ${{ inputs.file_name }}
           platforms: ${{ matrix.platform }}
           push: ${{ inputs.push }}
           tags: ${{ steps.meta.outputs.tags }}

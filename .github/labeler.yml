@@ -1,0 +1,10 @@
+version: 1
+labels:
+  - label: "feature"
+    title: "^feat: .*"
+  - label: "fix"
+    title: "^fix: .*"
+  - label: "chore"
+    title: "^chore: .*"
+  - label: "WIP"
+    title: "^WIP.*"

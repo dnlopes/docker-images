@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  semantic_pr:
+    name: Semantic PR
+    uses: SiggilumDiaboli/github-workflows/.github/workflows/pull-requests.yaml@main
+
+  docker_build_spacelift-runner:
+    name: Docker spacelift-runner
+    uses: ./.github/workflows/template_docker_build.yaml
+    with:
+      push: false
+      file_name: spacelift-runner.Dockerfile
+      image_name: spacelift-runner
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}

@@ -3,17 +3,23 @@ name: CI
 on:
   push:
     tags:
-      - "v*.*.*"
+    - "v*.*.*"
   workflow_dispatch:
 
 jobs:
   docker_build_spacelift-runner:
     name: Docker spacelift-runner
-    uses: ./.github/workflows/template_docker_build.yaml
+    uses: ./.github/workflows/templates/docker_build_push.yaml
     with:
       push: true
       file_name: spacelift-runner.Dockerfile
       image_name: spacelift-runner
+      tags: |
+        latest
+        type=semver,pattern={{raw}}
+        type=semver,pattern={{version}}
+        type=semver,pattern={{major}}.{{minor}}
+        type=semver,pattern={{major}}
     secrets:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}

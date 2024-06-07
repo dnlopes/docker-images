@@ -9,7 +9,7 @@ on:
 jobs:
   docker_build_spacelift-runner:
     name: Docker spacelift-runner
-    uses: ./.github/workflows/templates/docker_build_push.yaml
+    uses: ./.github/workflows/template_docker_build_push.yaml
     with:
       push: true
       file_name: spacelift-runner.Dockerfile
